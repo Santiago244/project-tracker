@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Project - Project Tracker{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3>✏️ Edit Project</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Project Name *</label>
+                        <input type="text" class="form-control" id="name" name="name" 
+                               value="{{ project.project_name }}" required maxlength="100">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" 
+                                  maxlength="500">{{ project.project_description or '' }}</textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" name="status">
+                            <option value="Not Started" {% if project.status == 'Not Started' %}selected{% endif %}>Not Started</option>
+                            <option value="In Progress" {% if project.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                            <option value="Completed" {% if project.status == 'Completed' %}selected{% endif %}>Completed</option>
+                            <option value="On Hold" {% if project.status == 'On Hold' %}selected{% endif %}>On Hold</option>
+                        </select>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('index') }}" class="btn btn-secondary me-md-2">Cancel</a>
+                        <button type="submit" class="btn btn-primary">💾 Update Project</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
